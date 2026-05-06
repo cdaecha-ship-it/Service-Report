@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Report - Fillable Template</title>
+    <style>
+        @font-face {
+            font-family: 'Sarabun';
+            src: url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap');
+        }
+        body {
+            font-family: 'Sarabun', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            font-size: 12px;
+        }
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 10mm;
+            margin: 10px auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            position: relative;
+        }
+        @media print {
+            body { background: none; padding: 0; }
+            .a4-page { margin: 0; box-shadow: none; border: none; }
+            .no-print { display: none; }
+            input[type="text"], textarea {
+                border: none !important;
+                padding: 0 !important;
+            }
+            .checkbox-custom { border: 1px solid #000 !important; }
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .logo-box {
+            width: 80px;
+            height: 60px;
+            border: 1px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 10px;
+        }
+        .company-info {
+            text-align: right;
+            flex-grow: 1;
+        }
+        .company-name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .report-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 4px;
+            text-align: left;
+        }
+        .bg-grey { background-color: #f2f2f2; font-weight: bold; }
+        .center { text-align: center; }
+        
+        /* Interactive Input Styles */
+        input[type="text"] {
+            width: 95%;
+            border: 1px solid #eee;
+            font-family: 'Sarabun', sans-serif;
+            font-size: 12px;
+            padding: 2px;
+        }
+        textarea {
+            width: 100%;
+            border: 1px solid #eee;
+            font-family: 'Sarabun', sans-serif;
+            font-size: 12px;
+            resize: vertical;
+            display: block;
+            box-sizing: border-box;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 2px 0;
+        }
+        input[type="checkbox"] {
+            cursor: pointer;
+            width: 14px;
+            height: 14px;
+        }
+
+        .flex { display: flex; }
+        .flex-1 { flex: 1; }
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .signature-box {
+            width: 48%;
+            text-align: center;
+            border: 1px solid #000;
+        }
+        .footer-info {
+            position: absolute;
+            bottom: 5mm;
+            left: 10mm;
+            right: 10mm;
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            color: #333;
+        }
+        .maintenance-table td:nth-child(3),
+        .maintenance-table td:nth-child(4),
+        .maintenance-table td:nth-child(5) {
+            text-align: center;
+            width: 50px;
+        }
+        .maintenance-table td:last-child {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="a4-page">
+        <div class="header">
+            <div style="display: flex; align-items: center;">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEB
+AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+AQEBAQEBAQEBAQEBAQH/wAARCABJAFEDASIAAhEBAxEB/8QAHgABAAICAwADAAAA
+AAAAAAAAAAkKBwgBAwYEBQv/xAA4EAAABwACAQEECAILAQAAAAABAgMEBQYHAAgJ
+ERITFDEKFRYXISJBUZGxGiM2WFlxgZSV0uHw/8QAHAEBAAICAwEAAAAAAAAAAAAA
+AAEDBAYCBQgH/8QALxEAAgEDAwIEBQMFAAAAAAAAAQIDAAQRBRIhBjETIkFRBxQy
+YXEVUtEjgaGx8P/aAAwDAQACEQMRAD8Av8ccccUpxxyOvyT+RSmeNbHalsd5y3Rt
+Zi7doTHPW8FmjZm4mGD1/Dy0wnJvCPPyBHJpRCyChy/nBZZIAD09eZdhYXmqXtrp
+2n273d9eyrBbW6NGjSyt2UNM8ca8Akl3UYHGTgUHPFSKccqf/wBLD68f3Lu13/Fw
+/wD05k7E/pOmEbdsmUYzE9R+zVelNY0So51Gz05HRJIaFfXCbZwjWVljJk96WNYK
+vCOXhk/zlbpqGL6iHNwm+GfXUEUk8vT1wkUMck0j/N6adkUMTzyuQt6WISJHchQW
+IUhQzEKbPCk/b/lf5qzlxwHy/H8R/Ufl68c0Sq6ccccUpxxxxSnHHHFKch98zlg3
+Kudd8/d4N2wwDqFaFtci28nf+xBIQ9TnYQ1dn1FarEhOw040CecuyNpFICNk1zMo
+94UixCiYppbZudhK1FvZyxzEVX4SNRM5kZibkGkVFMG5TFKZd7IP1kGjVEpjlKKq
+6yZAExQE3qIcq4/SwIl9bOheFDXIiQtRFezFZkEfs/GO7AB2S1DuR0X5CxaDwTM1
+CKJmTeFAUDFUIIK+hy+u2dCWkd91j07aSywQxzajGryXVvb3duqhHYmW2uwbaZeA
+NkwKZIYjIFc0XcwBOPXP/Ef7qNT70vJF/ji+Ln/a59/L7vPX+Iczb1n0jv697G4O
+1uHmP8cGkVV1rlBbWXPqW2ohbfeINayMEpKqVgWtDaOgnZ1odWOjPh3bdYXa6Xu1
+kjehgphBmV1A4n+7a6+ogAf2FsXs/wCg/VHp+n7/AL/vzcDx853cWnfXpW7cZ7b2
+rdr2kw9y4dr0uebt2qCWgQhjuF3CsWRJBFIPznWUOUiZQExjFABEPWep9DabFpuo
+yJqPT25LG6cBOk+l45GMcDSARyxwLLE5KZEkTLInLKe4rLynoV/sQPb259vzn8V+
+u9xxxzxBWDTjjjilOOOOKU4/+/jxzgRAPmPp6/gH8uKVCH5A+8fTy4XfDugezdc9
+M7N1nt7urbDWyEawd13MF7fSJqFkrODuxqzMBLWNjnrpVm+tP2eQdwiQtnEc6klV
+iLtAlycyuXUYuf5o+cVivFliEqmaVF8LREJMlYhinLD1hg49sXIw8G0A4oNwMZsw
+R9s4lTAR5Av2eyntPc/Ot182WE6v3fSMK60dTLoxxm5A4i4HIWe/axISbKZl7bY3
+7kBiywkGYpJAIeNlJ1b4eP8AgY5wqchw2m7adDd47A9jetesQ+86BTGNedujaKzo
+1kQjITJHyFAWiHFmxtnLslJFR9cJtQ8RMnfCo4NCrmWVIVQxiB1ep3l9ZW/jWWny
+alKbm1iEEMscLpFNNHHNOXdgCsKM7kZBwAfpDGtx6J0TpzqDWxp/U3VVv0dpg0jX
+Lw6vdWl1extqNhpd7d6XpyxWsUsgOoXkNvbswXd4byLbLNeNbW03fcPLJ1jo3k2g
+vF5Y8vtMfqdhhYeWY6StD1ouaEXnc/kNDjIpdyZyEok/dRcY9ZpAZmCZ3qJwKcUg
+E4aaVn6R50wsmDdrexsHgOu/Y/qTeMtp1jTCEpiEtb1NXtdnq9Zn6gISQJfVaatW
+cSiyz1ZsqLF4zOiU5zGAI2vLR0G7t6D3W77dj+uuM6nZLrnOYdD7R1r0CEgFHat+
+t9PYTWf6vEVR4QSllZiKq1wkXk+xTEgJkbGUEpvdD6ay6r4q+4Gb9Q/J/gWadZNS
+sriyRni1i8pRg6u5dhqD/M6Ys42F/VwIIDLFqdjfviWRYvsii4EROIip6hmsbgk4
+ZgPTzKfqRcg5yDtOU5znBPYitY8OLJCOZANvn5QMxVGfapwwVHbwwWALbA2MMpNl
+KB80nrivYTf9P6B90sJzHr/iBdxcWTWKXAV6N0SIVloaOa1yiPQmlm7+wumk2hOI
+IuToNzRKC6/vQEChz4HSPz0dbe5m55916eY52C67X/ZqU+0DDVttqDKGq2xVuNar
+vnbik2JhIum71YWTV06ZAKXw79No5SbuRdETQUhKpPXPSp7od5FMNy3x4+TzLtQ0
+npUjWo+Q7R6hJapUb7boCx1pNOk5ZVXTxYYaxv1V5KValalTEYKOO1MVMiREy+u6
+Q9au9nZntP4elNP6W611PynxYY/Owmg6bsR42MdanaFYBlFR8TSYlAxZNWNfuo5g
+BmqxFvgWziRcPFiEBEikszhlVccqDjH35HcY4BqPDjAYkMAM4OfUr5TxngsQP471
+dU45wAegfv8+/jznlozgZ74Gfz61jU4445NKch60Xd+zmY6b5BqtB5d2C0OUsUT
+UnvUZ7CVNeXzaMklMfg4aSax1lFwkzhVE9EkHEw9bLpnIssxfKGVT9j2RmF44pVW
+K+T3lTbUzAKSjH9rGt7ywuuU26SsM6Wk3moS8domfTWV2KyT9eVUqsq9maJJ2GC+
+uZcxaqkdhIGfl96UvtZT05fyUjL9jFaiHZ1voC9a7MhPNiiyNkUZCnmK6HVcevCr
+ITie7kilXpLMrFlFYClm1JIvvPhzDZGOIB7ICIlAfUA9kRD0+QB8v0D15WHiPMr2
+R+usdsVlq2TrZ5OI2Bhbq/U2E/N3SwW0+rdj6TVKiiyj509jostbYnHa03zyeNWb
+JT52fd21CxykEDaNbm2npnovX+r49Uk0OC0nOkC2+Yjub1LWSR7y31G4tYbdWRzJ
+LcDTLqKMeVPFCCR40ZnWm4uYrcRiVH2tu86JvP1IDu5GAN2T6YU+vf0kpZvKNTaR
+Q6jBVnsTb7tju+a1rOluUZFq8irPmVWn6hD57k0RcbAojJaZSrZWpS02gjYiRbGd
+2VKOURIWGAVMqWnNu4FVX7BTUXpXdyyZu37TZLAN4yOtKkrfkup09Uq/ctFmckZK
+tUXZrbF3iQXrL18w9ZRrW2kpFtW6i7YVDa7XDy99t6ZQYKUTd9d70pecFwjszJaF
+QK5Oz0P1+i9ehNXk3mN22mpXwHtys7eboVbr0HIM5iNnCRcxbbDL1tNvX0gL3x/m
+d7NWyVi0W1UyLPU9ZnavnFfjLTHWBzLdZpNec6qQkptG1e9l2AS2b2UvY2ceVZko
+jWUk/sfDkUmnZHssJd3T4GdfyHyQaKUDSK0p1q3RUMPy7Sh0lSOaMpHNNMVkiR2j
+s22K76joKaxT+o267QXkViqsE2NuG4KQMKSO7qpIJXLDBOG2+sriHlHHRevU9a5b
+sQxz+tQuMfeB7t2o7n1K9NbTo7Bd/aqay9YO3XM+akobfWUnTgr+vsH/ANdNiLSD
+V2TnXkT3yG/e7lgaxK9r0ok2HxIAgzj7HKxq+oKvNXI/UlzNnTaqIy7ZuWnqnC8A
+aHXKWKQOZIhlDBup0v79b72M2TrnUr1mVFp2ebJ0tt+9FscRMyL+cs2h0nTqZQJt
+zCQ7n2QrmeOG1hJJ19ORWkpSYSkkHgOiNG6RnExXPnXUHTmqdL6gdM1iO2ivUWUs
+lrdwXsaiK7ubKRTPbM8e9Z7OZSgbcoA3AE4rJjmWZSU8TaNo/qKUPmjSUYUntiQc
+++ajB8W63ZUuW6PGdj0tQfSEbe2BafbNWUkms7aYx1U4VxOrt65NmXl64hG2Q0gx
+etTv30O7mCyLuurFiDt0wk+4450lc6ccccUpxxxxSuBAB+Yev8w/yH5h8g/EP1AO
+YpbYRibKdq1oZ5HmrWyUckknTZ9vSa4jMVZOYevJGVJASKccV3ElfyEjIP3QMlUQ
+VeyD50b+veOFFMr8ctiuJ4N4gmlhEo2yCKR4/EUo8ZV9jDeDHLImGyNkjr2dgYID
+DDAEA5AIBAPvz6/esIl60ddSwU9Vy4TkJa3abC2ttkgS51UgiJ2zsllF2U/Kx4RI
+NX0szWWWO1fOElHDcV3AInIVwsB/vZTD8ZnHVvfTOT5zKvdBr7Cp3p5I0uuvHVxr
+EUAFjK/ZnDiPUWm4eOApPgY6RO4atBSRFBJMUERJlHjl51HUCdxvrwtnOTczk53Q
+NnJfOd1ratn91tAe8Me2AiDsqjjHCjt7du3Jry0bRqXDPIaQiKnXIt9XK8ao193H
+wsczcQdVMoyVNWohZu3TPGwJlY2OUGIZmRYCdgzN8P7TZESep445jPJJId0jvI3m
+5dmc+Z2kbliT5nd3b3dmY8sSZAC8AADjgADsAB29gAB9gB2FOOOOcKmnHHHFK//Z" alt="i+MED Logo" style="height: 80px; width: auto;">
+            </div>
+            <div class="company-info">
+                <div class="company-name">บริษัท ไอเมด ลาบอราทอรี จำกัด</div>
+                <div>240 อาคารอโยธยา ทาวเวอร์ ชั้น 1, 20 ถ.รัชดาภิเษก ห้วยขวาง กรุงเทพฯ 10310</div>
+                <div>Tel: +662 692 5244 | Fax: +662 692 5245</div>
+            </div>
+        </div>
+
+        <div class="report-title">ใบรายงานการปฏิบัติงานแผนกช่างบริการ</div>
+
+        <table>
+            <tr>
+                <td class="bg-grey" style="width: 150px;">Hospital/Department</td>
+                <td><input type="text" placeholder="ระบุชื่อหน่วยงาน"></td>
+            </tr>
+            <tr>
+                <td class="bg-grey">Address</td>
+                <td><input type="text" placeholder="ระบุที่อยู่"></td>
+            </tr>
+        </table>
+
+        <table>
+            <tr class="bg-grey center">
+                <td>Model</td>
+                <td>S/N</td>
+                <td>Software ver:</td>
+                <td>Installation date:</td>
+            </tr>
+            <tr>
+                <td><label class="checkbox-item"><input type="checkbox"> GEM PREMIER</label></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td><label class="checkbox-item"><input type="checkbox"> ACLTOP</label></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+            </tr>
+        </table>
+
+        <div class="flex">
+            <div class="flex-1" style="border: 1px solid #000; padding: 5px;">
+                <div class="bg-grey" style="margin-bottom: 5px;">Status</div>
+                <label class="checkbox-item"><input type="checkbox"> Contract</label>
+                <label class="checkbox-item"><input type="checkbox"> เครื่องซื้ออยู่ในประกัน</label>
+                <label class="checkbox-item"><input type="checkbox"> เครื่องซื้อหมดประกัน</label>
+            </div>
+            <div class="flex-1" style="border: 1px solid #000; border-left: none; padding: 5px;">
+                <div class="bg-grey" style="margin-bottom: 5px;">Service</div>
+                <div class="flex" style="flex-wrap: wrap; gap: 10px;">
+                    <label class="checkbox-item"><input type="checkbox"> Installation (New)</label>
+                    <label class="checkbox-item"><input type="checkbox"> Installation (Replace)</label>
+                    <label class="checkbox-item"><input type="checkbox"> Maintenance Next: PM: <input type="text" style="width: 80px; border-bottom: 1px solid #000; border-top:none; border-left:none; border-right:none;"></label>
+                    <label class="checkbox-item"><input type="checkbox"> Repair</label>
+                    <label class="checkbox-item"><input type="checkbox"> Other <input type="text" style="width: 100px; border-bottom: 1px solid #000; border-top:none; border-left:none; border-right:none;"></label>
+                </div>
+            </div>
+        </div>
+
+        <table class="maintenance-table" style="margin-top: 10px;">
+            <tr class="bg-grey center">
+                <td style="width: 250px;">Preventive maintenance list</td>
+                <td style="width: 80px;">Criteria</td>
+                <td>GEM</td>
+                <td>ACLTOP</td>
+                <td>Other</td>
+                <td>Remark</td>
+            </tr>
+            <tr class="bg-grey center"><td colspan="6">GEM PREMIER</td></tr>
+            <tr><td>1. Check Status Cartridge</td><td class="center">Ready</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
+            <tr><td>2. Check Thermal Printer</td><td class="center">Done</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
+            <tr><td>3. Clean Instrument</td><td class="center">Done</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
+            <tr><td>4. Back Up Instrument</td><td class="center">Done</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
+            
+            <tr class="bg-grey center"><td colspan="6">ACLTOP</td></tr>
+            <tr><td>1. Replace PM Kit</td><td class="center">Done</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
+            <tr><td>2. Clean Instrument</td><td class="center">Done</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
+            <tr><td>3. Check Temperatures</td><td class="center">37 C</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
+            <tr><td>4. Check ORU Optical Readings</td><td class="center">Pass</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
+            <tr><td>5. Check Led Blue - 405</td><td class="center">&lt; 255</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td>Fill a result in box</td></tr>
+            <tr><td>&nbsp;&nbsp;&nbsp;Led Red - 671</td><td class="center">&lt; 255</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td>Fill a result in box</td></tr>
+            <tr><td>&nbsp;&nbsp;&nbsp;Led Green - 535</td><td class="center">&lt; 255</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td>Fill a result in box</td></tr>
+            <tr><td>6. Check Dark Readings All ORU</td><td class="center">&lt; 8000</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td>Fill a result in box</td></tr>
+            <tr><td>7. Run Air Blanking For All ORU</td><td class="center">Pass</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
+            <tr><td>8. Run Factor Diluent Blanking For All ORU</td><td class="center">Pass</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
+            <tr><td>9. Other :</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+            <tr><td>UPS can back up time (&ge; ....... mins)</td><td class="center">Pass</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
+        </table>
+
+        <div class="flex" style="min-height: 80px;">
+            <div class="flex-1" style="border: 1px solid #000; padding: 5px;">
+                <div class="bg-grey">Problem/Error found/other:</div>
+                <textarea rows="4" placeholder="กรอกปัญหาที่พบ"></textarea>
+            </div>
+            <div class="flex-1" style="border: 1px solid #000; border-left: none; padding: 5px;">
+                <div class="bg-grey">Correction:</div>
+                <textarea rows="4" placeholder="กรอกการแก้ไข"></textarea>
+            </div>
+        </div>
+
+        <table style="margin-top: 10px;">
+            <tr class="bg-grey center">
+                <td style="width: 150px;">Part Number</td>
+                <td>Description</td>
+                <td style="width: 50px;">Qty</td>
+                <td style="width: 150px;">Remarks</td>
+            </tr>
+            <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+            <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+            <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+        </table>
+
+        <div class="signature-section">
+            <div class="signature-box">
+                <div class="bg-grey">Customer</div>
+                <div style="text-align: left; padding: 5px;">
+                    <div class="bg-grey" style="padding: 2px; margin-bottom: 5px;">สรุปผลการปฏิบัติงาน</div>
+                    <div class="checkbox-item">
+                        <input type="checkbox"> งานเสร็จสิ้น &nbsp;&nbsp; 
+                        <input type="checkbox"> งานยังไม่เสร็จ วันที่แจ้ง <input type="text" style="width: 60px;"> เวลา <input type="text" style="width: 40px;">
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox"> ทดลองใช้ &nbsp;&nbsp; 
+                        <input type="checkbox"> อื่นๆ <input type="text" style="width: 100px;">
+                    </div>
+                    <div style="margin: 5px 0;">
+                        เริ่มงาน <input type="text" style="width: 80px;"> เสร็จสิ้น <input type="text" style="width: 80px;">
+                    </div>
+                    <div class="flex" style="margin-top: 5px;">
+                        <div style="flex: 1;">
+                            ลูกค้า <input type="text" style="width: 150px; border-bottom: 1px solid #000; border-top:none; border-left:none; border-right:none;"><br>
+                            <div class="center" style="margin-top: 10px;">( <input type="text" style="width: 130px;"> )</div>
+                        </div>
+                        <div style="width: 110px; border-left: 1px solid #eee; padding-left: 5px;">
+                             ความพึงพอใจ:<br>
+                             <label class="checkbox-item"><input type="checkbox"> ดีมาก</label>
+                             <label class="checkbox-item"><input type="checkbox"> ดี</label>
+                             <label class="checkbox-item"><input type="checkbox"> พอใช้</label>
+                             <label class="checkbox-item"><input type="checkbox"> ปรับปรุง</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="signature-box">
+                <div class="bg-grey">Engineer</div>
+                <div style="text-align: left; padding: 5px;">
+                    <div class="bg-grey" style="padding: 2px; margin-bottom: 5px;">การปฏิบัติงาน</div>
+                    <label class="checkbox-item"><input type="checkbox"> งานตามแพลน</label>
+                    <label class="checkbox-item"><input type="checkbox"> งานแทรก</label>
+                    
+                    <div style="margin-top: 15px;">
+                        ผู้ปฏิบัติงาน : <input type="text" style="width: 150px; border-bottom: 1px solid #000; border-top:none; border-left:none; border-right:none;">
+                    </div>
+                    <div class="center" style="margin-top: 10px;">
+                        ( <input type="text" style="width: 150px;"> )
+                    </div>
+                    <div class="center" style="margin-top: 15px;">
+                        วันที่ <input type="text" style="width: 100px; border-bottom: 1px solid #000; border-top:none; border-left:none; border-right:none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <div style="text-align: left;">Effective date: 01/10/2564</div>
+            <div style="text-align: right;">F-EN-001.R03</div>
+        </div>
+    </div>
+    
+    <div class="no-print" style="text-align: center; margin: 20px 0;">
+        <button onclick="window.print()" style="padding: 10px 20px; font-size: 14px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px;">พิมพ์เอกสาร (Print to PDF)</button>
+        <button onclick="window.location.reload()" style="padding: 10px 20px; font-size: 14px; cursor: pointer; background: #6c757d; color: white; border: none; border-radius: 4px; margin-left: 10px;">ล้างข้อมูล (Reset)</button>
+    </div>
+</body>
+</html>
