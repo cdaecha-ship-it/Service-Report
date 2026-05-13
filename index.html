@@ -1,328 +1,709 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Report - Fillable Template</title>
-    <style>
-        @font-face {
-            font-family: 'Sarabun';
-            src: url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap');
-        }
-        body {
-            font-family: 'Sarabun', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f0f0f0;
-            font-size: 12px;
-        }
-        .a4-page {
-            width: 210mm;
-            min-height: 297mm;
-            padding: 10mm;
-            margin: 10px auto;
-            background: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            box-sizing: border-box;
-            position: relative;
-        }
-        @media print {
-            body { background: none; padding: 0; }
-            .a4-page { margin: 0; box-shadow: none; border: none; }
-            .no-print { display: none; }
-            input[type="text"], textarea {
-                border: none !important;
-                padding: 0 !important;
-            }
-            .checkbox-custom { border: 1px solid #000 !important; }
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #000;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-        }
-        .logo-box {
-            width: 80px;
-            height: 60px;
-            border: 1px dashed #ccc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: 10px;
-        }
-        .company-info {
-            text-align: right;
-            flex-grow: 1;
-        }
-        .company-name {
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .report-title {
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 10px;
-        }
-        th, td {
-            border: 1px solid #000;
-            padding: 4px;
-            text-align: left;
-        }
-        .bg-grey { background-color: #f2f2f2; font-weight: bold; }
-        .center { text-align: center; }
-        
-        /* Interactive Input Styles */
-        input[type="text"] {
-            width: 95%;
-            border: 1px solid #eee;
-            font-family: 'Sarabun', sans-serif;
-            font-size: 12px;
-            padding: 2px;
-        }
-        textarea {
-            width: 100%;
-            border: 1px solid #eee;
-            font-family: 'Sarabun', sans-serif;
-            font-size: 12px;
-            resize: vertical;
-            display: block;
-            box-sizing: border-box;
-        }
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin: 2px 0;
-        }
-        input[type="checkbox"] {
-            cursor: pointer;
-            width: 14px;
-            height: 14px;
-        }
-
-        .flex { display: flex; }
-        .flex-1 { flex: 1; }
-        .signature-section {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        .signature-box {
-            width: 48%;
-            text-align: center;
-            border: 1px solid #000;
-        }
-        .footer-info {
-            position: absolute;
-            bottom: 5mm;
-            left: 10mm;
-            right: 10mm;
-            display: flex;
-            justify-content: space-between;
-            font-size: 9px;
-            color: #333;
-        }
-        .maintenance-table td:nth-child(3),
-        .maintenance-table td:nth-child(4),
-        .maintenance-table td:nth-child(5) {
-            text-align: center;
-            width: 50px;
-        }
-        .maintenance-table td:last-child {
-            width: 150px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>i+MED · ServiceOS</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="a4-page">
-        <div class="header">
-            <div style="display: flex; align-items: center;">
-                <img src="data:image/jpeg;base64,
-" alt="i+MED Logo" style="height: 80px; width: auto;">
-            </div>
-            <div class="company-info">
-                <div class="company-name">บริษัท ไอเมด ลาบอราทอรี จำกัด</div>
-                <div>240 อาคารอโยธยา ทาวเวอร์ ชั้น 1, 20 ถ.รัชดาภิเษก ห้วยขวาง กรุงเทพฯ 10310</div>
-                <div>Tel: +662 692 5244 | Fax: +662 692 5245</div>
-            </div>
-        </div>
 
-        <div class="report-title">ใบรายงานการปฏิบัติงานแผนกช่างบริการ</div>
+<!-- ═══ TOAST ═══ -->
+<div class="toast" id="toast">
+  <svg class="toast-ok" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+  <span id="toast-msg">บันทึกสำเร็จ</span>
+</div>
 
-        <table>
-            <tr>
-                <td class="bg-grey" style="width: 150px;">Hospital/Department</td>
-                <td><input type="text" placeholder="ระบุชื่อหน่วยงาน"></td>
-            </tr>
-            <tr>
-                <td class="bg-grey">Address</td>
-                <td><input type="text" placeholder="ระบุที่อยู่"></td>
-            </tr>
-        </table>
+<div class="shell">
 
-        <table>
-            <tr class="bg-grey center">
-                <td>Model</td>
-                <td>S/N</td>
-                <td>Software ver:</td>
-                <td>Installation date:</td>
-            </tr>
-            <tr>
-                <td><label class="checkbox-item"><input type="checkbox"> GEM PREMIER</label></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-            </tr>
-            <tr>
-                <td><label class="checkbox-item"><input type="checkbox"> ACLTOP</label></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-                <td><input type="text"></td>
-            </tr>
-        </table>
-
-        <div class="flex">
-            <div class="flex-1" style="border: 1px solid #000; padding: 5px;">
-                <div class="bg-grey" style="margin-bottom: 5px;">Status</div>
-                <label class="checkbox-item"><input type="checkbox"> Contract</label>
-                <label class="checkbox-item"><input type="checkbox"> เครื่องซื้ออยู่ในประกัน</label>
-                <label class="checkbox-item"><input type="checkbox"> เครื่องซื้อหมดประกัน</label>
-            </div>
-            <div class="flex-1" style="border: 1px solid #000; border-left: none; padding: 5px;">
-                <div class="bg-grey" style="margin-bottom: 5px;">Service</div>
-                <div class="flex" style="flex-wrap: wrap; gap: 10px;">
-                    <label class="checkbox-item"><input type="checkbox"> Installation (New)</label>
-                    <label class="checkbox-item"><input type="checkbox"> Installation (Replace)</label>
-                    <label class="checkbox-item"><input type="checkbox"> Maintenance Next: PM: <input type="text" style="width: 80px; border-bottom: 1px solid #000; border-top:none; border-left:none; border-right:none;"></label>
-                    <label class="checkbox-item"><input type="checkbox"> Repair</label>
-                    <label class="checkbox-item"><input type="checkbox"> Other <input type="text" style="width: 100px; border-bottom: 1px solid #000; border-top:none; border-left:none; border-right:none;"></label>
-                </div>
-            </div>
-        </div>
-
-        <table class="maintenance-table" style="margin-top: 10px;">
-            <tr class="bg-grey center">
-                <td style="width: 250px;">Preventive maintenance list</td>
-                <td style="width: 80px;">Criteria</td>
-                <td>GEM</td>
-                <td>ACLTOP</td>
-                <td>Other</td>
-                <td>Remark</td>
-            </tr>
-            <tr class="bg-grey center"><td colspan="6">GEM PREMIER</td></tr>
-            <tr><td>1. Check Status Cartridge</td><td class="center">Ready</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
-            <tr><td>2. Check Thermal Printer</td><td class="center">Done</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
-            <tr><td>3. Clean Instrument</td><td class="center">Done</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
-            <tr><td>4. Back Up Instrument</td><td class="center">Done</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
-            
-            <tr class="bg-grey center"><td colspan="6">ACLTOP</td></tr>
-            <tr><td>1. Replace PM Kit</td><td class="center">Done</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
-            <tr><td>2. Clean Instrument</td><td class="center">Done</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
-            <tr><td>3. Check Temperatures</td><td class="center">37 C</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
-            <tr><td>4. Check ORU Optical Readings</td><td class="center">Pass</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
-            <tr><td>5. Check Led Blue - 405</td><td class="center">&lt; 255</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td>Fill a result in box</td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;Led Red - 671</td><td class="center">&lt; 255</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td>Fill a result in box</td></tr>
-            <tr><td>&nbsp;&nbsp;&nbsp;Led Green - 535</td><td class="center">&lt; 255</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td>Fill a result in box</td></tr>
-            <tr><td>6. Check Dark Readings All ORU</td><td class="center">&lt; 8000</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td>Fill a result in box</td></tr>
-            <tr><td>7. Run Air Blanking For All ORU</td><td class="center">Pass</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
-            <tr><td>8. Run Factor Diluent Blanking For All ORU</td><td class="center">Pass</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
-            <tr><td>9. Other :</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-            <tr><td>UPS can back up time (&ge; ....... mins)</td><td class="center">Pass</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text" value="√ (Done) or X (Not done)"></td></tr>
-        </table>
-
-        <div class="flex" style="min-height: 80px;">
-            <div class="flex-1" style="border: 1px solid #000; padding: 5px;">
-                <div class="bg-grey">Problem/Error found/other:</div>
-                <textarea rows="4" placeholder="กรอกปัญหาที่พบ"></textarea>
-            </div>
-            <div class="flex-1" style="border: 1px solid #000; border-left: none; padding: 5px;">
-                <div class="bg-grey">Correction:</div>
-                <textarea rows="4" placeholder="กรอกการแก้ไข"></textarea>
-            </div>
-        </div>
-
-        <table style="margin-top: 10px;">
-            <tr class="bg-grey center">
-                <td style="width: 150px;">Part Number</td>
-                <td>Description</td>
-                <td style="width: 50px;">Qty</td>
-                <td style="width: 150px;">Remarks</td>
-            </tr>
-            <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-            <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-            <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-        </table>
-
-        <div class="signature-section">
-            <div class="signature-box">
-                <div class="bg-grey">Customer</div>
-                <div style="text-align: left; padding: 5px;">
-                    <div class="bg-grey" style="padding: 2px; margin-bottom: 5px;">สรุปผลการปฏิบัติงาน</div>
-                    <div class="checkbox-item">
-                        <input type="checkbox"> งานเสร็จสิ้น &nbsp;&nbsp; 
-                        <input type="checkbox"> งานยังไม่เสร็จ วันที่แจ้ง <input type="text" style="width: 60px;"> เวลา <input type="text" style="width: 40px;">
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox"> ทดลองใช้ &nbsp;&nbsp; 
-                        <input type="checkbox"> อื่นๆ <input type="text" style="width: 100px;">
-                    </div>
-                    <div style="margin: 5px 0;">
-                        เริ่มงาน <input type="text" style="width: 80px;"> เสร็จสิ้น <input type="text" style="width: 80px;">
-                    </div>
-                    <div class="flex" style="margin-top: 5px;">
-                        <div style="flex: 1;">
-                            ลูกค้า <input type="text" style="width: 150px; border-bottom: 1px solid #000; border-top:none; border-left:none; border-right:none;"><br>
-                            <div class="center" style="margin-top: 10px;">( <input type="text" style="width: 130px;"> )</div>
-                        </div>
-                        <div style="width: 110px; border-left: 1px solid #eee; padding-left: 5px;">
-                             ความพึงพอใจ:<br>
-                             <label class="checkbox-item"><input type="checkbox"> ดีมาก</label>
-                             <label class="checkbox-item"><input type="checkbox"> ดี</label>
-                             <label class="checkbox-item"><input type="checkbox"> พอใช้</label>
-                             <label class="checkbox-item"><input type="checkbox"> ปรับปรุง</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="signature-box">
-                <div class="bg-grey">Engineer</div>
-                <div style="text-align: left; padding: 5px;">
-                    <div class="bg-grey" style="padding: 2px; margin-bottom: 5px;">การปฏิบัติงาน</div>
-                    <label class="checkbox-item"><input type="checkbox"> งานตามแพลน</label>
-                    <label class="checkbox-item"><input type="checkbox"> งานแทรก</label>
-                    
-                    <div style="margin-top: 15px;">
-                        ผู้ปฏิบัติงาน : <input type="text" style="width: 150px; border-bottom: 1px solid #000; border-top:none; border-left:none; border-right:none;">
-                    </div>
-                    <div class="center" style="margin-top: 10px;">
-                        ( <input type="text" style="width: 150px;"> )
-                    </div>
-                    <div class="center" style="margin-top: 15px;">
-                        วันที่ <input type="text" style="width: 100px; border-bottom: 1px solid #000; border-top:none; border-left:none; border-right:none;">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-info">
-            <div style="text-align: left;">Effective date: 01/10/2564</div>
-            <div style="text-align: right;">F-EN-001.R03</div>
-        </div>
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-brand">i+MED Laboratories</div>
+    <div class="sb-name">Service<em>OS</em></div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-group">Overview</div>
+    <div class="sb-item active" data-page="dashboard" onclick="nav(this)">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke-width="1.8"/><rect x="14" y="3" width="7" height="7" rx="1.5" stroke-width="1.8"/><rect x="3" y="14" width="7" height="7" rx="1.5" stroke-width="1.8"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke-width="1.8"/></svg>
+      <span>Dashboard</span>
     </div>
-    
-    <div class="no-print" style="text-align: center; margin: 20px 0;">
-        <button onclick="window.print()" style="padding: 10px 20px; font-size: 14px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px;">พิมพ์เอกสาร (Print to PDF)</button>
-        <button onclick="window.location.reload()" style="padding: 10px 20px; font-size: 14px; cursor: pointer; background: #6c757d; color: white; border: none; border-radius: 4px; margin-left: 10px;">ล้างข้อมูล (Reset)</button>
+    <div class="sb-group">Operations</div>
+    <div class="sb-item" data-page="service" onclick="nav(this)">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      <span>Service Calls</span>
+      <span class="sb-badge" id="badge-open">0</span>
     </div>
+    <div class="sb-group">Database</div>
+    <div class="sb-item" data-page="customers" onclick="nav(this)">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+      <span>Hospitals & Inst.</span>
+    </div>
+    <div class="sb-item" data-page="engineers" onclick="nav(this)">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      <span>Engineers</span>
+    </div>
+    <div class="sb-item" data-page="sparepart" onclick="nav(this)">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+      <span>Spare Parts</span>
+    </div>
+  </nav>
+  <div class="sb-foot">
+    <strong id="sb-date">—</strong>ServiceOS v3.1
+    <div class="sync-row" onclick="openSetup()" title="ตั้งค่า Google Sheets">
+      <span class="sync-dot sync-idle" id="sync-dot"></span>
+      <span class="sync-label" id="sync-label">ตั้งค่า Sheets</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+  <div class="topbar">
+    <div class="tb-left">
+      <span class="tb-title" id="page-title">Dashboard</span>
+      <span class="tb-crumb" id="page-crumb"></span>
+    </div>
+    <div class="tb-right">
+      <div id="tb-sync-status" style="display:none;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--muted);margin-right:6px">
+        <span class="sync-dot" id="tb-sync-dot" style="background:var(--border2)"></span>
+        <span id="tb-sync-text">—</span>
+      </div>
+      <button class="btn btn-ghost btn-sm" onclick="openSetup()" title="Google Sheets Settings" style="padding:6px 10px">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3" stroke-width="1.8"/></svg>
+      </button>
+      <button class="btn btn-accent" onclick="openNewSC()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        New Service Call
+      </button>
+    </div>
+  </div>
+
+  <div class="content">
+
+  <!-- ══════ DASHBOARD ══════ -->
+  <div class="page active" id="page-dashboard">
+    <div class="stats-row">
+      <div class="stat" style="--_c:var(--blue)">
+        <div class="stat-lbl">Total SC</div>
+        <div class="stat-val" id="d-total">0</div>
+        <div class="stat-note">ทั้งหมด</div>
+      </div>
+      <div class="stat" style="--_c:var(--yellow)">
+        <div class="stat-lbl">Open</div>
+        <div class="stat-val" id="d-open">0</div>
+        <div class="stat-note">รอดำเนินการ</div>
+      </div>
+      <div class="stat" style="--_c:var(--accent)">
+        <div class="stat-lbl">In Progress</div>
+        <div class="stat-val" id="d-prog">0</div>
+        <div class="stat-note">กำลังดำเนินการ</div>
+      </div>
+      <div class="stat" style="--_c:var(--green)">
+        <div class="stat-lbl">Done</div>
+        <div class="stat-val" id="d-done">0</div>
+        <div class="stat-note">เสร็จสิ้น</div>
+      </div>
+      <div class="stat" style="--_c:var(--red)">
+        <div class="stat-lbl">Low Stock</div>
+        <div class="stat-val" id="d-lowstock">0</div>
+        <div class="stat-note">อะไหล่ใกล้หมด</div>
+      </div>
+    </div>
+
+    <div class="main-side">
+      <div>
+        <div class="card">
+          <div class="card-hd">
+            <span class="card-title">Service Calls ล่าสุด</span>
+            <div style="display:flex;gap:6px">
+              <button class="ftab active" onclick="dashFilter('all',this)">All</button>
+              <button class="ftab" onclick="dashFilter('open',this)">Open</button>
+              <button class="ftab" onclick="dashFilter('inprogress',this)">In Progress</button>
+            </div>
+          </div>
+          <div class="card-body p0">
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr>
+                  <th>SC No.</th><th>วันที่</th><th>โรงพยาบาล</th><th>เครื่อง / SN</th><th>ช่าง</th><th>Status</th><th></th>
+                </tr></thead>
+                <tbody id="dash-tbl"></tbody>
+              </table>
+              <div class="empty" id="dash-empty"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/></svg><p>ยังไม่มี Service Call</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="card">
+          <div class="card-hd"><span class="card-title">สรุปสถานะ</span></div>
+          <div class="card-body"><div id="status-summary" style="display:flex;flex-direction:column;gap:8px"></div></div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><span class="card-title">อะไหล่ใกล้หมด</span></div>
+          <div class="card-body p0" id="lowstock-widget" style="padding:0 18px"></div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><span class="card-title">ช่างประจำ</span></div>
+          <div class="card-body" id="eng-summary" style="display:flex;flex-direction:column;gap:8px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ SERVICE CALLS ══════ -->
+  <div class="page" id="page-service">
+    <div class="shdr">
+      <span class="stitle">Service Calls</span>
+      <button class="btn btn-accent" onclick="openNewSC()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>New SC
+      </button>
+    </div>
+    <div class="card">
+      <div class="card-body" style="padding-bottom:10px">
+        <div class="filters">
+          <div class="search-wrap">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="m21 21-4.35-4.35"/></svg>
+            <input type="text" id="sc-q" placeholder="SC / โรงพยาบาล / SN..." oninput="renderSCTable()">
+          </div>
+          <select id="sc-fst" onchange="renderSCTable()" style="width:auto;font-size:12px">
+            <option value="">ทุกสถานะ</option>
+            <option value="open">Open</option>
+            <option value="inprogress">In Progress</option>
+            <option value="done">Done</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <select id="sc-feng" onchange="renderSCTable()" style="width:auto;font-size:12px">
+            <option value="">ทุกช่าง</option>
+          </select>
+        </div>
+      </div>
+      <div class="card-body p0">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th>SC No.</th><th>วันที่</th><th>โรงพยาบาล</th><th>เครื่อง</th><th>Serial No.</th><th>ช่าง</th><th>ประเภท</th><th>Status</th><th>Priority</th><th>อะไหล่</th><th></th>
+            </tr></thead>
+            <tbody id="sc-tbl"></tbody>
+          </table>
+          <div class="empty" id="sc-empty"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/></svg><p>ไม่พบข้อมูล</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════ HOSPITALS ══════ -->
+  <div class="page" id="page-customers">
+    <div class="shdr">
+      <span class="stitle">Hospitals & Instruments</span>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost" onclick="openAddInst()">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>+ เครื่องมือ
+        </button>
+        <button class="btn btn-accent" onclick="openAddHosp()">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>+ โรงพยาบาล
+        </button>
+      </div>
+    </div>
+    <div class="filters" style="margin-bottom:16px">
+      <div class="search-wrap" style="max-width:260px">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="hosp-q" placeholder="ค้นหาโรงพยาบาล / จังหวัด..." oninput="renderHospGrid()">
+      </div>
+    </div>
+    <div class="g3" id="hosp-grid"></div>
+    <div class="empty" id="hosp-empty" style="display:none"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16"/></svg><p>ยังไม่มีโรงพยาบาล</p></div>
+  </div>
+
+  <!-- ══════ ENGINEERS ══════ -->
+  <div class="page" id="page-engineers">
+    <div class="shdr">
+      <span class="stitle">Engineer Profiles</span>
+      <button class="btn btn-accent" onclick="openAddEng()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>+ เพิ่มช่าง
+      </button>
+    </div>
+    <div class="g3" id="eng-grid"></div>
+    <div class="empty" id="eng-empty" style="display:none"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7"/></svg><p>ยังไม่มีข้อมูลช่าง</p></div>
+  </div>
+
+  <!-- ══════ SPARE PARTS ══════ -->
+  <div class="page" id="page-sparepart">
+    <div class="shdr">
+      <span class="stitle">Warehouse Stock</span>
+      <button class="btn btn-accent" onclick="openAddPart()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>+ เพิ่มอะไหล่
+      </button>
+    </div>
+    <div class="g4" style="margin-bottom:16px">
+      <div class="stat" style="--_c:var(--blue)"><div class="stat-lbl">รายการทั้งหมด</div><div class="stat-val" id="sp-total">0</div></div>
+      <div class="stat" style="--_c:var(--green)"><div class="stat-lbl">มูลค่าชิ้น</div><div class="stat-val" id="sp-qty">0</div></div>
+      <div class="stat" style="--_c:var(--red)"><div class="stat-lbl">ใกล้หมด</div><div class="stat-val" id="sp-low">0</div></div>
+      <div class="stat" style="--_c:var(--accent)"><div class="stat-lbl">หมดสต็อก</div><div class="stat-val" id="sp-zero">0</div></div>
+    </div>
+    <div class="card">
+      <div class="card-body" style="padding-bottom:10px">
+        <div class="filters">
+          <div class="search-wrap">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="m21 21-4.35-4.35"/></svg>
+            <input type="text" id="sp-q" placeholder="Part No / ชื่อ..." oninput="renderParts()">
+          </div>
+          <select id="sp-fcat" onchange="renderParts()" style="width:auto;font-size:12px">
+            <option value="">ทุกประเภท</option>
+            <option>GEM PREMIER</option><option>ACLTOP</option><option>ทั่วไป</option>
+          </select>
+        </div>
+      </div>
+      <div class="card-body p0">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr>
+              <th>Part No.</th><th>ชื่ออะไหล่</th><th>ประเภท</th><th>คงเหลือ</th><th>Min</th><th>หน่วย</th><th>ระดับ</th><th></th>
+            </tr></thead>
+            <tbody id="sp-tbl"></tbody>
+          </table>
+          <div class="empty" id="sp-empty"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4"/></svg><p>ไม่พบรายการ</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /shell -->
+
+<!-- ════════════ MODALS ════════════ -->
+
+<!-- NEW SERVICE CALL -->
+<div class="overlay" id="m-sc">
+  <div class="modal" style="width:660px">
+    <div class="mhd">
+      <div><div class="mtitle">New Service Call</div><div class="msub" id="sc-gen-no">SC-XXXXXXXXXX</div></div>
+      <button class="btn-icon" onclick="closeM('m-sc')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="mbody">
+      <div class="fgrid">
+        <div class="frow">
+          <div class="fg"><label>วันที่แจ้ง</label><input type="date" id="sc-date"></div>
+          <div class="fg"><label>เวลา</label><input type="time" id="sc-time"></div>
+        </div>
+        <hr class="div">
+        <div class="frow">
+          <div class="fg">
+            <label>โรงพยาบาล / ลูกค้า</label>
+            <select id="sc-hosp" onchange="populateInstDropdown()">
+              <option value="">-- เลือกโรงพยาบาล --</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>ผู้ติดต่อ</label>
+            <input type="text" id="sc-contact" placeholder="ชื่อผู้ติดต่อ">
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label>เครื่องมือ / Serial No.</label>
+            <select id="sc-inst">
+              <option value="">-- เลือกเครื่อง --</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Serial No. (manual ถ้าไม่มีในระบบ)</label>
+            <input type="text" id="sc-sn-manual" class="inp-mono" placeholder="Auto จาก DB หรือกรอกเอง">
+          </div>
+        </div>
+        <hr class="div">
+        <div class="frow">
+          <div class="fg">
+            <label>ช่างผู้รับผิดชอบ</label>
+            <select id="sc-eng">
+              <option value="">-- เลือกช่าง --</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>ประเภทงาน</label>
+            <select id="sc-type">
+              <option>Corrective Maintenance</option>
+              <option>Preventive Maintenance</option>
+              <option>Installation</option>
+              <option>Training</option>
+              <option>Consultation</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg span2">
+          <label>อาการ / รายละเอียด</label>
+          <textarea id="sc-sym" placeholder="บรรยายอาการ..."></textarea>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label>สถานะ</label>
+            <select id="sc-status">
+              <option value="open">Open</option>
+              <option value="inprogress">In Progress</option>
+              <option value="done">Done</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>ลำดับความสำคัญ</label>
+            <select id="sc-pri">
+              <option value="normal">ปกติ</option>
+              <option value="urgent">เร่งด่วน</option>
+              <option value="low">ไม่เร่งด่วน</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="btn btn-ghost" onclick="closeM('m-sc')">ยกเลิก</button>
+      <button class="btn btn-accent" onclick="saveSC()">บันทึก Service Call</button>
+    </div>
+  </div>
+</div>
+
+<!-- SC DETAIL -->
+<div class="overlay" id="m-sc-detail">
+  <div class="modal" style="width:720px">
+    <div class="mhd">
+      <div><div class="mtitle" id="det-title">SC Detail</div><div class="msub" id="det-sub"></div></div>
+      <div style="display:flex;gap:6px;align-items:center">
+        <select id="det-st" onchange="updateSCStatus()" style="font-size:12px;padding:5px 8px;width:auto">
+          <option value="open">Open</option><option value="inprogress">In Progress</option>
+          <option value="done">Done</option><option value="cancelled">Cancelled</option>
+        </select>
+        <button class="btn-icon" onclick="closeM('m-sc-detail')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+    </div>
+    <div class="mbody">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('info',this)">ข้อมูลงาน</button>
+        <button class="tab-btn" onclick="switchTab('parts',this)">เบิกอะไหล่</button>
+        <button class="tab-btn" onclick="switchTab('history',this)">ประวัติ</button>
+      </div>
+      <!-- INFO -->
+      <div class="tab-pane active" id="tab-info">
+        <div class="g2" style="gap:12px">
+          <div><div id="det-info"></div></div>
+          <div>
+            <div id="det-sym" style="font-size:13px;line-height:1.7;background:var(--bg);padding:12px;border-radius:var(--r);border:1px solid var(--border);min-height:80px"></div>
+            <div style="margin-top:10px">
+              <label style="display:block;margin-bottom:4px">การแก้ไข / Solution</label>
+              <textarea id="det-solution" placeholder="บันทึกวิธีแก้ไข..." style="min-height:80px" onchange="saveSolution()"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- PARTS -->
+      <div class="tab-pane" id="tab-parts">
+        <div style="margin-bottom:14px">
+          <div style="font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">รายการที่เบิกแล้ว</div>
+          <div id="det-parts-list"></div>
+        </div>
+        <hr class="div">
+        <div style="font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">เบิกจาก Warehouse</div>
+        <div style="display:flex;gap:8px;align-items:flex-end;margin-bottom:16px">
+          <div class="fg" style="flex:1"><label>อะไหล่</label><select id="req-part"><option value="">-- เลือก --</option></select></div>
+          <div class="fg" style="width:80px"><label>จำนวน</label><input type="number" id="req-qty" min="1" value="1" style="text-align:center"></div>
+          <button class="btn btn-accent" onclick="requisition()">เบิก</button>
+        </div>
+        <div style="font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">เบิกจากช่าง (Personal Stock)</div>
+        <div style="display:flex;gap:8px;align-items:flex-end">
+          <div class="fg" style="flex:1"><label>อะไหล่ติดตัวช่าง</label><select id="req-eng-part"><option value="">-- เลือก --</option></select></div>
+          <div class="fg" style="width:80px"><label>จำนวน</label><input type="number" id="req-eng-qty" min="1" value="1" style="text-align:center"></div>
+          <button class="btn btn-ghost" onclick="requisitionEng()">ใช้</button>
+        </div>
+      </div>
+      <!-- HISTORY -->
+      <div class="tab-pane" id="tab-history">
+        <div id="det-history" style="display:flex;flex-direction:column;gap:8px"></div>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="btn btn-danger btn-sm" onclick="deleteSC()">ลบ SC</button>
+      <div style="flex:1"></div>
+      <button class="btn btn-primary" onclick="printSCReport()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+        พิมพ์ Report
+      </button>
+      <button class="btn btn-ghost" onclick="closeM('m-sc-detail')">ปิด</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD HOSPITAL -->
+<div class="overlay" id="m-hosp">
+  <div class="modal" style="width:500px">
+    <div class="mhd">
+      <div class="mtitle" id="hosp-modal-title">เพิ่มโรงพยาบาล</div>
+      <button class="btn-icon" onclick="closeM('m-hosp')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="mbody">
+      <div class="fgrid">
+        <div class="fg span2"><label>ชื่อโรงพยาบาล / หน่วยงาน</label><input type="text" id="h-name" placeholder="ชื่อโรงพยาบาล"></div>
+        <div class="frow">
+          <div class="fg"><label>จังหวัด</label><input type="text" id="h-prov" placeholder="กรุงเทพฯ"></div>
+          <div class="fg"><label>โทรศัพท์</label><input type="text" id="h-phone" placeholder="02-XXX-XXXX"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>ผู้ติดต่อหลัก</label><input type="text" id="h-contact" placeholder="ชื่อผู้ติดต่อ"></div>
+          <div class="fg"><label>แผนก</label><input type="text" id="h-dept" placeholder="ห้องแล็บ / ICU"></div>
+        </div>
+        <div class="fg span2"><label>ที่อยู่</label><textarea id="h-addr" style="min-height:56px" placeholder="ที่อยู่โรงพยาบาล"></textarea></div>
+        <div class="fg span2"><label>หมายเหตุ</label><input type="text" id="h-note" placeholder="หมายเหตุเพิ่มเติม"></div>
+      </div>
+    </div>
+    <input type="hidden" id="h-edit-id">
+    <div class="mfoot">
+      <button class="btn btn-ghost" onclick="closeM('m-hosp')">ยกเลิก</button>
+      <button class="btn btn-accent" onclick="saveHosp()">บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- HOSPITAL DETAIL -->
+<div class="overlay" id="m-hosp-detail">
+  <div class="modal" style="width:680px">
+    <div class="mhd">
+      <div><div class="mtitle" id="hd-title">Hospital Detail</div><div class="msub" id="hd-sub"></div></div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-ghost btn-sm" onclick="editHosp()">แก้ไข</button>
+        <button class="btn-icon" onclick="closeM('m-hosp-detail')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+    </div>
+    <div class="mbody">
+      <div class="g2" style="margin-bottom:16px">
+        <div id="hd-info"></div>
+        <div>
+          <div style="font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">ประวัติ Service Call</div>
+          <div id="hd-sc-history"></div>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div style="font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.06em;text-transform:uppercase">เครื่องมือในระบบ</div>
+          <button class="btn btn-ghost btn-sm" onclick="closeM('m-hosp-detail');openAddInstForHosp()">+ เพิ่มเครื่อง</button>
+        </div>
+        <div id="hd-instruments"></div>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="btn btn-danger btn-sm" onclick="deleteHosp()">ลบโรงพยาบาล</button>
+      <div style="flex:1"></div>
+      <button class="btn btn-ghost" onclick="closeM('m-hosp-detail')">ปิด</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD INSTRUMENT -->
+<div class="overlay" id="m-inst">
+  <div class="modal" style="width:520px">
+    <div class="mhd">
+      <div class="mtitle">เพิ่ม / แก้ไขเครื่องมือ</div>
+      <button class="btn-icon" onclick="closeM('m-inst')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="mbody">
+      <div class="fgrid">
+        <div class="fg span2">
+          <label>โรงพยาบาล</label>
+          <select id="i-hosp"><option value="">-- เลือกโรงพยาบาล --</option></select>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label>Brand / Model</label>
+            <select id="i-model">
+              <option>GEM PREMIER 3000</option><option>GEM PREMIER 3500</option>
+              <option>GEM PREMIER 5000</option><option>ACLTOP 300</option>
+              <option>ACLTOP 500</option><option>ACLTOP 700</option>
+            </select>
+          </div>
+          <div class="fg"><label>Serial No.</label><input type="text" id="i-sn" class="inp-mono" placeholder="XXXXXXXXX"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>วันติดตั้ง</label><input type="date" id="i-install"></div>
+          <div class="fg"><label>วันหมดประกัน</label><input type="date" id="i-warranty"></div>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label>สถานะ</label>
+            <select id="i-status">
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+              <option value="warranty">In Warranty</option>
+            </select>
+          </div>
+          <div class="fg"><label>Location (ห้อง/แผนก)</label><input type="text" id="i-loc" placeholder="ห้องแล็บ ชั้น 2"></div>
+        </div>
+        <div class="fg span2"><label>หมายเหตุ</label><input type="text" id="i-note" placeholder="หมายเหตุ"></div>
+      </div>
+    </div>
+    <input type="hidden" id="i-edit-id">
+    <div class="mfoot">
+      <button class="btn btn-ghost" onclick="closeM('m-inst')">ยกเลิก</button>
+      <button class="btn btn-accent" onclick="saveInst()">บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD ENGINEER -->
+<div class="overlay" id="m-eng">
+  <div class="modal" style="width:540px">
+    <div class="mhd">
+      <div class="mtitle" id="eng-modal-title">เพิ่มช่าง</div>
+      <button class="btn-icon" onclick="closeM('m-eng')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="mbody">
+      <div class="fgrid">
+        <div class="frow">
+          <div class="fg"><label>ชื่อ-นามสกุล</label><input type="text" id="e-name" placeholder="ชื่อช่าง"></div>
+          <div class="fg"><label>รหัสพนักงาน</label><input type="text" id="e-code" class="inp-mono" placeholder="ENG-001"></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label>โทรศัพท์</label><input type="text" id="e-phone" placeholder="08X-XXXXXXX"></div>
+          <div class="fg"><label>อีเมล</label><input type="email" id="e-email" placeholder="engineer@imed.co.th"></div>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label>เขตพื้นที่รับผิดชอบ</label>
+            <select id="e-zone">
+              <option>กรุงเทพฯ และปริมณฑล</option>
+              <option>ภาคกลาง</option><option>ภาคเหนือ</option>
+              <option>ภาคอีสาน</option><option>ภาคใต้</option>
+              <option>ทั่วประเทศ</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>ความเชี่ยวชาญ</label>
+            <select id="e-spec">
+              <option>GEM PREMIER</option><option>ACLTOP</option>
+              <option>All Products</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg span2"><label>หมายเหตุ</label><input type="text" id="e-note" placeholder="หมายเหตุ"></div>
+      </div>
+    </div>
+    <input type="hidden" id="e-edit-id">
+    <div class="mfoot">
+      <button class="btn btn-ghost" onclick="closeM('m-eng')">ยกเลิก</button>
+      <button class="btn btn-accent" onclick="saveEng()">บันทึกช่าง</button>
+    </div>
+  </div>
+</div>
+
+<!-- ENGINEER DETAIL -->
+<div class="overlay" id="m-eng-detail">
+  <div class="modal" style="width:660px">
+    <div class="mhd">
+      <div><div class="mtitle" id="ed-title">Engineer Profile</div><div class="msub" id="ed-sub"></div></div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-ghost btn-sm" onclick="editEng()">แก้ไข</button>
+        <button class="btn-icon" onclick="closeM('m-eng-detail')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+    </div>
+    <div class="mbody">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab2('einfo',this)">ข้อมูล</button>
+        <button class="tab-btn" onclick="switchTab2('eparts',this)">อะไหล่ติดตัว</button>
+        <button class="tab-btn" onclick="switchTab2('esc',this)">ประวัติงาน</button>
+      </div>
+      <div class="tab-pane active" id="tab-einfo">
+        <div class="g2"><div id="ed-info"></div><div id="ed-stats"></div></div>
+      </div>
+      <div class="tab-pane" id="tab-eparts">
+        <div style="margin-bottom:12px">
+          <div style="font-size:12px;font-weight:500;color:var(--muted);margin-bottom:8px">อะไหล่ที่ช่างพกติดตัว</div>
+          <div id="ed-parts-list" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px"></div>
+        </div>
+        <hr class="div">
+        <div style="font-size:12px;font-weight:500;color:var(--muted);margin-bottom:8px">เพิ่ม / แก้ไขอะไหล่ติดตัว</div>
+        <div style="display:flex;gap:8px;align-items:flex-end">
+          <div class="fg" style="flex:1"><label>อะไหล่</label><select id="ep-part"><option value="">-- เลือก --</option></select></div>
+          <div class="fg" style="width:80px"><label>จำนวน</label><input type="number" id="ep-qty" min="0" value="1" style="text-align:center"></div>
+          <button class="btn btn-accent" onclick="saveEngPart()">บันทึก</button>
+        </div>
+      </div>
+      <div class="tab-pane" id="tab-esc">
+        <div id="ed-sc-history"></div>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="btn btn-danger btn-sm" onclick="deleteEng()">ลบช่าง</button>
+      <div style="flex:1"></div>
+      <button class="btn btn-ghost" onclick="closeM('m-eng-detail')">ปิด</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD SPARE PART -->
+<div class="overlay" id="m-part">
+  <div class="modal" style="width:460px">
+    <div class="mhd">
+      <div class="mtitle">เพิ่มอะไหล่</div>
+      <button class="btn-icon" onclick="closeM('m-part')"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <div class="mbody">
+      <div class="fgrid">
+        <div class="frow">
+          <div class="fg"><label>Part No.</label><input type="text" id="p-no" class="inp-mono" placeholder="GP-001"></div>
+          <div class="fg"><label>ประเภท</label><select id="p-cat"><option>GEM PREMIER</option><option>ACLTOP</option><option>ทั่วไป</option></select></div>
+        </div>
+        <div class="fg span2"><label>ชื่ออะไหล่</label><input type="text" id="p-name" placeholder="ชื่ออะไหล่"></div>
+        <div class="frow3">
+          <div class="fg"><label>จำนวน</label><input type="number" id="p-qty" min="0" value="0" style="text-align:center"></div>
+          <div class="fg"><label>Min Stock</label><input type="number" id="p-min" min="0" value="2" style="text-align:center"></div>
+          <div class="fg"><label>หน่วย</label><input type="text" id="p-unit" value="ชิ้น"></div>
+        </div>
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="btn btn-ghost" onclick="closeM('m-part')">ยกเลิก</button>
+      <button class="btn btn-accent" onclick="savePart()">บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ SETUP MODAL ════════════ -->
+<div class="setup-overlay" id="setup-overlay" style="display:none">
+  <div class="setup-box">
+    <div class="setup-hd">
+      <h2>เชื่อมต่อ Google Sheets</h2>
+      <p>ข้อมูลทั้งหมดจะถูกเก็บใน Google Spreadsheet ของคุณ<br>ทีมทุกคนเห็นข้อมูลเดียวกัน Real-time</p>
+    </div>
+    <div class="setup-body">
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div class="step-text">ไปที่ <a href="https://script.google.com" target="_blank">script.google.com</a> → สร้างโปรเจกต์ใหม่ → วางโค้ดจากไฟล์ <code>Code.gs</code></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div class="step-text">แก้ไข <code>SPREADSHEET_ID</code> ในโค้ด → Run function <code>setupSheets()</code> ครั้งแรกเพื่อสร้าง Sheet</div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">3</div>
+        <div class="step-text">กด <code>Deploy → New Deployment → Web App</code><br>ตั้ง Execute as: <strong>Me</strong> · Who has access: <strong>Anyone</strong></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">4</div>
+        <div class="step-text">Copy <strong>Web App URL</strong> แล้ววางด้านล่าง</div>
+      </div>
+      <div class="url-input-wrap">
+        <label>WEB APP URL</label>
+        <input type="url" id="gs-url-input" placeholder="https://script.google.com/macros/s/XXXXXX/exec">
+      </div>
+      <div id="setup-test-result" style="margin-top:10px;font-size:12px;min-height:20px"></div>
+    </div>
+    <div class="setup-ft">
+      <span class="setup-skip" onclick="skipSetup()">ใช้ LocalStorage แทน (ข้ามไปก่อน)</span>
+      <button class="btn btn-ghost" onclick="testConnection()">ทดสอบการเชื่อมต่อ</button>
+      <button class="btn btn-accent" onclick="saveGSUrl()">บันทึกและ Sync</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
